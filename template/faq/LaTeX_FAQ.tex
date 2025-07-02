@@ -1,0 +1,209 @@
+\documentclass[10pt,a4paper,oneside,twocolumn,fleqn,dvipdfmx]{jsarticle}
+
+\usepackage{url}
+
+\title{{\LaTeX} FAQ}
+\author{Koseki Lab}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{\TeX}
+古関研究室では，\TeX (読み方は，テフ，テックなど)という文章組版システムを用いて論文・資料作成を行います。
+組版とは，文章などのレイアウトを行うなどという意味です。
+\TeX は Microsoft Word や一太郎などのワープロソフトとは違い，ソースファイルを作成し，typeset，プレビューという手順を踏みます。
+その他の\TeX の特徴として以下のものが挙げられます。
+
+\begin{itemize}
+	\item  数式の出力が非常に綺麗で，高品質な組版が可能であること
+	\item 現存する様々な OS に移植されていること
+	\item 環境やバージョンにより組版結果が変わらないこと
+\end{itemize}
+
+ちなみに，\TeX と表示できない環境における公式の表記は``TeX''です。
+
+\subsection{\LaTeX とは}
+\TeX にはマクロ機能があり，\LaTeX とはこのマクロ機能を使って\TeX をより使いやすくしたものです。
+文書の体裁がある程度決まっている場合，マクロをそれ用に組んでおけば簡単に\TeX の文章を作成することができます。(例えばtypesetが簡単にできるなど。)
+そのマクロの中でも特によく使われるものが \LaTeX です。
+このマニュアルも\LaTeX を用いて作ってあります。
+学会で論文発表する場合には，\TeX を使って論文を作成するのは必須です。
+必ず覚えて下さい。
+一方，某学会研究会のようにMS W$\circ$rdのテンプレートしか用意されていない場合もあります。
+
+ちなみに，\LaTeX と表示できない環境における公式の表記は``LaTeX''です。
+
+\subsection{関連ファイルと基本的な内容}
+(注意)この内容は曖昧な記憶にもとづいています。
+大きな間違いは無いはずですが詳細な調査に基づく簡素な記述による更新が待たれます。
+
+\subsubsection*{.texファイル}
+文章の本体，本文が記述されているファイル。
+このファイルをplatexコマンドによりtypeset（組版，\TeX コードに書いた指示に従いページを組むこと）することで.pdfファイルの前身である.dviファイルが作成されます。
+
+\subsubsection*{.styファイル}
+スタイルファイルと呼ぶことが多い。
+パッケージや文書のレイアウト等の記述を行う。
+文書のレイアウトは普通クラスファイルに記述する。
+C言語でいうところのincludeするヘッダみたいなものか。処理の実装も同じファイル内に書かれているのでヘッダとは言いにくいが。
+
+\subsubsection*{.clsファイル}
+クラスファイルと呼ぶことが多い。
+文書クラスを定義する。版面の配置，フォントサイズ，行間等，文書の骨格を定義する。
+\LaTeX ソース先頭の\verb|\documentclass|コマンドで読み込む。
+
+IEEE transactions，電気学会論文誌など，学会毎に専用のクラスファイルが存在することが多い。
+
+\subsubsection*{.auxファイル}
+.tex中のref等の対応を記録しているファイル。
+
+\subsubsection*{.dviファイル}
+.texをtypesetして出来るファイル。
+ページ中の文字や図などの配置が記述されており，dvioutなどを使用して閲覧できる。
+pdfのなかった時代に最終出力としてよく使われた形式である。
+ここからdvip系のコマンドにより.pdfに変換することが出来る。
+
+\subsubsection*{.bibファイル}
+参考文献のリストの情報を保存したファイル。
+これを用いることでbibliographyをいちいち書かずに済む。
+作成にはMendeley等の文献管理ソフトを併用するのが比較的便利。
+
+\subsection{platexを用いたコンパイルの基本的な流れ}
+後に説明するパッケージをインストールした後のコンパイルの流れは以下の通りです。
+\begin{enumerate}
+\item platexコマンドで.texファイルを.dviファイルに変換します。
+この際，refや参考文献等の情報をもった.auxファイルも同時に作成されます。
+コマンドプロンプトなどのターミナル上で
+\begin{verbatim}
+	platex オプション xxx.tex
+\end{verbatim}
+と入力します。xxx.dviが出力として得られます。
+
+dviファイルをただ作成するだけならばオプションは不要ですが，少なくともtexファイルのエンコードに対応した引数をつけることをおすすめします。
+\verb|-kanji=エンコード|で指定できます。エンコードにはeuc, jis, sjis, utf8のいずれかを指定します。
+texファイルのエンコードをutf-8で保存し\verb|-kanji=utf8|オプションをつけるのがおすすめです。
+windowsではshift-jisエンコードで保存しがちですが，shift-jisは2バイトで1文字を表すコード体系で2バイト目が半角￥と同じ文字コードである「だめ文字」が存在し，時々エラーの原因になります。
+
+\item
+\verb|\label|, \verb|\ref|等の相互参照を用いる場合は，参照を正しく反映させるためにplatexを2回以上実行する必要があります。
+1回目のplatexの実行で参照情報をauxファイルに書き込み，2回目でauxファイルを読み込み，dviファイルに反映を行います。
+参照が反映されていない部分には``??''が置かれます。
+参照が追加，変更，削除される度に2回のtypesetを行います。
+
+\item
+bibファイルを用いた参考文献の自動挿入，参照を行うには，pbibtexを使用します。
+コマンドプロンプトなどのターミナル上で
+\begin{verbatim}
+	pbibtex オプション xxx
+\end{verbatim}
+と入力します。xxxはbibファイルを読み込んでいるtexファイルの拡張子\texttt{.tex}を除いた名前とします。
+コマンドを実行するとxxx.bblとxxx.blgファイルが出力されます。これらが参考文献の自動配置に用いられます。
+
+オプションはただ出力を得るためには不要ですが，\verb|-kanji=utf8|をつけることをおすすめします。
+出力されるbblファイルのエンコードがデフォルトのshift-jisからutf-8になります。
+
+\item 最後に，dvipdfmxコマンドを用いることでこの.dviファイルを.pdfファイルへと変換します。
+コマンドプロンプトなどのターミナル上で
+\begin{verbatim}
+	dvipdfmx オプション xxx.dvi
+\end{verbatim}
+と入力します。xxx.pdfが出力として得られます。
+pdfファイルをただ作成するだけならばオプションは不要です。
+\end{enumerate}
+
+総括すると，
+platex $\to$ pbibtex $\to$ platex 2回以上 $\to$ dvipdfmx
+で正しく参照，参考文献が反映されたpdfを得ることができます。
+
+\vskip\baselineskip
+\noindent おまけ\par
+platex，texファイルからpdfファイルを直接得るためには，ptex2pdfを利用します。
+また，texファイルから必要な回数，順番のplatex，pbibtex，pmendex等を自動で行うプログラム（スクリプト）として，latexmkがあります。
+以上2つは\TeX liveには標準で含まれています。
+程度が上がるので詳細は省略しますが，TeXworks，texstudioやVS codeのtypeset用シーケンスの内部でよく使われます。
+
+一般的には統合開発環境でこれらを制御するので直接これらのコマンドを触ることはあまりありませんが，覚えておいて損はないです。
+
+\section{\LaTeX のInstall}
+\LaTeX を制御するには様々なパッケージやソフトをインストールする必要があります。
+TeXLiveまたはW32TeX(Windowsのみ)をインストールしましょう。
+
+細かいファイルを大量に（3000ファイル程度）ダウンロードするせいか，途中でダウンロードに失敗することがよくあります。
+根気強く再トライしましょう\dots\dots
+
+\subsection{TeXLive}
+\url{https://www.tug.org/texlive/}
+
+\subsection{W32TeX}
+\url{https://www.ms.u-tokyo.ac.jp/~abenori/soft/abtexinst.html}
+
+\section{推奨エディタ：TeXstudio}
+\url{http://texstudio.sourceforge.net/}
+
+上記のTeXインストーラを用いることでデフォルトでTeXworksというエディタが付属しますが，機能面などからTeXstudioをおすすめします。
+
+\subsection{SumatraPDF}
+\url{https://www.sumatrapdfreader.org/free-pdf-reader.html}
+
+デフォルトで入っているAdobeReaderでPDFを開くかと思いますが，LaTeXで文章を書く場合に至ってはSumatraPDFというフリーソフトをおすすめします。
+
+このソフトのAdobeに対する利点は主に以下の2点です。
+\begin{itemize}
+	\item 開いている.pdfファイルに対する変更を随時確認し，反映する。
+	\item .pdfをダブルクリックすることによる\TeX 文書の逆探索が可能である。
+\end{itemize}
+前者では，xxx.texという.texファイルをtypesetしてxxx.pdfという.pdfファイルを作成する際，Adobe等によって.pdfファイルxxx.pdfを開いているとこれを更新できないという問題があります。SumatraPDFを使うことによりこの問題を回避することが出来ます。
+
+後者の機能は inverse search と呼ばれ，例えばxxx.pdfの変更したい部分をダブルクリックすることで該当する.tex ファイルxxx.texの該当位置を開くことが出来るという機能で文章の校正に非常に便利です。
+
+これらの機能はTeXstudioとの連携を通して確認することが出来ます。
+
+\section{FAQ}
+
+\LaTeX は1種のプログラミング言語ですので，きちんとしたルールに則って処理がなされています。従ってきちんとエラー文を読めば原因の箇所がわかる場合があります。裏を返すと意味のわからないエラーもよく出てきます。
+
+意味不明なエラーの場合，大体は「数式が閉じていなかったり，￥や＆が全角文字だったり，存在しない図を貼り付けていたり」などが原因です。
+
+ただ，エラー文などは常に意味のある事を言っているので，まずは自分でよく読解を試みて，Googleなどにエラー文を入れて検索した後に先輩に聞きましょう。電気系の学生を名乗ってパソコンを使って仕事をする以上，カレントディレクトリやpathの概念くらい等くらいは抑えて置くと今後も何かと役に立つかと思います。
+
+\subsection{cannot find xxx.sty ...}
+スタイルファイルがありませんということです。
+この場合，該当するstyファイルが「path上にない」ということですので，最も手っ取り早い解決法は.texがあるディレクトリに.styファイルを置くことです。
+PC内に見当たらない場合は検索してダウンロードする必要があります。
+
+発展としてpathの通ったところに.styファイルを置いて，mktexlsrコマンドを実行することで永続的にそのstyファイルへのアクセスを得ることが出来ます。
+
+\subsection{missing \$ inserted}
+よく見るエラーでいろいろな原因が考えられます。
+まずはエラーを吐いている文の前を注意深く確認してください。
+基本的にはドコかのequation，align，\$が閉じていないのが原因です。
+解決策として
+\begin{itemize}
+	\item 数式内には全角文字をなるべく置かない
+	\item 全角の￥や＄，＆などで検索をかける
+\end{itemize}
+などが考えうるでしょう。
+
+\subsection{No bounding box ...}
+図のサイズが測れないというエラーです。
+これは，図そのものが存在しない（名前やディレクトリの間違い）か形式が不適切の２つの理由があります。
+また，graphixの引数にdvipdfmxを用いていない場合等にも起きることがありますが本テンプレートを用いる限りにおいては問題ないかと思います。
+
+\subsection{Reference `\textit{refname}' on page \textit{n} undefined on input line \textit{k}.}
+dviファイルの第\textit{n}ページにある，ソースファイル上で\textit{k}行目に書かれている参照\textit{refname}に対応する\verb|\label{refname}|が未定義という警告です。
+該当の\textit{refname}の位置には??が出力されています。
+相互参照を新たに記述して1回目のtypesetではかならず出るので，もう一度platexを実行してください。
+それでもこの警告が消えない場合は，\verb|\label{refname}|が存在するか，\textit{refname}の綴りが間違っていないか確認してください。
+
+\subsection{Label `\textit{refname}' multiply defined.}
+同じ参照名のラベル\verb|\label{refname}|が2つ以上存在します。文書の一部をコピー and ペーストした際等によく見られます。
+
+\subsection{Citation `\textit{refname}' on page \textit{n} undefined on input line \textit{k}.}
+dviファイルの第\textit{n}ページにある，ソースファイル上で\textit{k}行目に書かれている文献参照\textit{refname}に対応する\verb|\bibitem{refname}|が未定義という警告です。
+該当の\textit{refname}の位置には??が出力されています。
+pbibtexを実行した後，2回以上platexを実行してください。
+それでもこの警告が消えない場合は，文献\textit{refname}が存在するか，\textit{refname}の綴りが間違っていないか確認してください。
+
+\end{document}

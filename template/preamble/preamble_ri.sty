@@ -1,0 +1,60 @@
+\usepackage{times}
+\usepackage{booktabs}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{listings}
+
+\usepackage{subfigure}
+\usepackage{url}
+\usepackage{multirow}
+\usepackage{latexsym}
+
+
+\special{pdf: minorversion=7} % pdf画像のため
+
+\usepackage{amsmath}
+\usepackage{ascmac}
+\usepackage{epsf}
+\usepackage{pifont}
+\usepackage{docmute} %単体でコンパイルできるようにする
+\usepackage{mathtools} % dcases を使う
+
+
+%\renewcommand{\gt}{\gtfamily}
+%\renewcommand{\sf}{\sffamily}
+
+
+% for hyperref
+\usepackage[dvipdfmx, bookmarkstype=toc, colorlinks=false, pdfborder={0 0 0}, bookmarks=true, bookmarksnumbered=true]{hyperref}
+\usepackage{pxjahyper}
+
+
+%%%%%%% 便利define 
+\newcommand{\bm}[1]{\mbox{\boldmath $#1$}}
+\newcommand{\eq}[1]{Eq.(\ref{eq:#1})}
+\newcommand{\zu}[1]{図\ref{fig:#1}}
+\newcommand{\shiki}[1]{式(\ref{eq:#1})}
+\newcommand{\fig}[1]{Fig.\ \ref{fig:#1}}
+\newcommand{\grp}[1]{Fig.\ \ref{grp:#1}}
+\newcommand{\tab}[1]{Table\ \ref{tab:#1}}
+\newcommand{\defeq}{:=}
+\newcommand{\bvec}[1]{\mbox{\boldmath $#1$}} %太字
+\newcommand{\tvec}[1]{\bvec{#1}^{\mathsf{T}}} %太字転置
+
+%% about theorem
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+
+\graphicspath{{./fig/}}
+
+%% matrix
+\newcommand{\mr}[1]{\mathrm{#1}}%rm体
+\newcommand{\ml}[1]{\mathcal{#1}}%frac体
+\newcommand{\bmat}[1]{\begin{bmatrix} #1 \end{bmatrix}}%行列簡略化
+\newcommand{\pmat}[1]{\begin{pmatrix} #1 \end{pmatrix}}%行列簡略化
+\newcommand{\mat}[1]{\left( \begin{matrix} #1 \end{matrix} \right)}%行列簡略化
+%\newcommand{\nom}[1]{ \ml{N} \{ 0,\sigma_{ #1 } \} }
+\newcommand{\expo}[1]{ \mathrm{e}^{#1} }
+

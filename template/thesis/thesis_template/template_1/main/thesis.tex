@@ -1,0 +1,91 @@
+\documentclass[12pt,a4paper,oneside,onecolumn,fleqn,dvipdfmx]{jreport} % classはjreport固定
+
+\usepackage{thesis_ja} % 卒業論文用のスタイルファイル 日本語:thesis_ja 英語:thesis_en
+
+\usepackage{preamble} % 適宜プリアンブルをpreamble.styに追加
+
+\usepackage{geometry}
+\geometry{left=25mm,right=25mm,top=30mm,bottom=30mm}
+
+% 表紙
+\thesis{
+    {\large
+        東京大学 \ 大学院工学系研究科\\
+        電気系工学専攻\\
+    }
+    \vskip 2em
+    yyyy年度\\
+    修士論文
+}
+
+\title{\LARGE
+    XXXXに関する研究
+}
+
+\professor{\large\\
+    \vskip 1em
+    古関　隆章 \ 教授
+}
+
+\date{\large
+    yyyy年mm月dd日提出
+}
+
+\author{\Large
+    \ 00-000000 \ 名前 name
+}
+
+\begin{document}
+\maketitle
+
+\maegaki
+\input{../chapter/abstract}
+
+\maetsuke
+\tableofcontents
+\listoffigures
+\listoftables
+
+% 本文
+\hombun
+
+\input{../chapter/introduction}
+\input{../chapter/setup}
+\input{../chapter/modeling}
+
+%\part{理論}
+
+\input{../chapter/conventional}
+\input{../chapter/proposed}
+
+%\part{応用}
+
+\input{../chapter/simulation}
+\input{../chapter/experiment}
+\input{../chapter/conclusion}
+
+\newpage
+\phantomsection
+\addcontentsline{toc}{chapter}{謝辞}
+\input{../chapter/acknowledgments}
+
+\newpage
+\phantomsection
+\addcontentsline{toc}{chapter}{付録}
+\input{../chapter/appendix}
+
+\newpage
+\phantomsection
+\addcontentsline{toc}{chapter}{参考文献}
+\bibliographystyle{IEEEtran}
+\bibliography{ref}
+
+\newpage
+\phantomsection
+\addcontentsline{toc}{chapter}{発表文献}
+\input{../chapter/publication}
+
+\newpage
+\printindex
+
+\end{document}

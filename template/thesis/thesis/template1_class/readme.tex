@@ -1,0 +1,48 @@
+\documentclass{kothesis} % クラスファイルにまとめました
+\usepackage{preamble} % 適宜プリアンブルをpreamble.styに追加
+% 表紙
+\affiliation{東京大学 工学部 電気電子工学科}
+\thesistype{2018}{解説資料}
+\title{クラスファイル ``kothesis'' の使い方 \\(まだ未完成です。.texファイルをみて察してください)}
+% 指導教員は2人まで指定可能
+\professor{古関　隆章}{教授}
+\date{yyyy年mm月dd日提出}
+\author{00-000000}{電電 太郎}
+
+\begin{document}
+    %タイトルページを作成
+    \maketitle
+    % 概要を追加
+    \includeabstract{chapter/abstract}
+    % 目次，図目次，表目次を追加
+    \makemokuji
+
+    % チャプタごとに別ファイルに
+    \include{chapter/introduction}
+    \include{chapter/setup}
+    \include{chapter/modeling}
+
+%    \part{理論} % 2部構成の場合
+
+    \include{chapter/conventional}
+    \include{chapter/proposed}
+
+%    \part{応用}
+
+    \include{chapter/simulation}
+    \include{chapter/experiment}
+    \include{chapter/conclusion}
+
+    % 謝辞，付録，発表文献は特殊なチャプタです
+    \includeacknowledgments{chapter/acknowledgments}
+    \includeappendix{chapter/appendix}
+
+    % 参考文献をBibTeXで
+    \bibliographystyle{IEEEtran}
+    \bibliography{ref}
+
+    \includepublication{chapter/publication}
+
+    \printindex
+
+\end{document}

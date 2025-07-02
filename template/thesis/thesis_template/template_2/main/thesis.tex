@@ -1,0 +1,103 @@
+\documentclass[12pt,a4paper,twoside,onecolumn,fleqn,dvipdfmx]{jsbook}
+% \documentclass[12pt,a4paper,oneside,onecolumn,fleqn,dvipdfmx,report]{jsbook}
+
+\usepackage{preamble}
+
+\usepackage{geometry}
+\geometry{left=25mm,right=25mm,top=30mm,bottom=30mm}
+
+\renewcommand{\sfdefault}{ptm}
+
+\renewcommand{\prepartname}{Part }
+\renewcommand{\postpartname}{}
+\renewcommand{\prechaptername}{Chapter }
+\renewcommand{\postchaptername}{}
+\renewcommand{\contentsname}{Contents}
+\renewcommand{\listfigurename}{List of Figures}
+\renewcommand{\listtablename}{List of Tables}
+\renewcommand{\appendixname}{Appendix~}
+\renewcommand{\figurename}{Figure~}
+\renewcommand{\tablename}{Table~}
+\renewcommand{\bibname}{References}
+
+\begin{document}
+
+    \thispagestyle{empty}
+    \begin{center}
+        \vspace*{6pt}
+        {\LARGE {\bf Doctoral Dissertation}}
+        \vskip 4ex
+        {\LARGE {\bf 博士論文 }}
+        \vskip 8ex
+        {\LARGE {\bf English Title}}
+        \vskip 4ex
+        {\LARGE {\bf （日本語 題目）}}
+        \vskip 4ex
+        {\Large by}
+        \vskip 4ex
+        {\LARGE {00-000000}\ \ {\bf Name}}
+        \vskip 12ex
+        {\large Dissertation Submitted to}
+        \vskip 2ex
+        {\large {\bf Department of Electrical Engineering and Information Systems}}
+        \vskip 2ex
+        {\large for the Degree of}
+        \vskip 2ex
+        {\large {\bf Doctor of Philosophy}}
+        \vskip 2ex
+        {\large at}
+        \vskip 2ex
+        {\large {\bf The University of Tokyo}}
+        \vskip 12ex
+        {\large {\bf Month yyyy}}
+        \vskip 12ex
+        {\large Supervisor:\\ {\bf Professor \ Takafumi Koseki}}
+    \end{center}
+
+    \frontmatter
+
+    \input{../chapter/abstract}
+    \input{../chapter/acknowledgment}
+
+    \tableofcontents
+    \listoffigures
+    \listoftables
+
+    \mainmatter
+
+    \input{../chapter/introduction}
+    \input{../chapter/setup}
+    \input{../chapter/modeling}
+
+    \part{Theory}
+
+    \input{../chapter/conventional}
+    \input{../chapter/proposed}
+
+    \part{Applications}
+
+    \input{../chapter/simulation}
+    \input{../chapter/experiment}
+
+    \input{../chapter/conclusion}
+
+    \newpage
+    \phantomsection
+    \addcontentsline{toc}{chapter}{Appendix}
+    \input{../chapter/appendix}
+
+    \newpage
+    \phantomsection
+    \addcontentsline{toc}{chapter}{Bibliography}
+    \bibliographystyle{tipsj}
+    \bibliography{ref}
+
+    \newpage
+    \phantomsection
+    \addcontentsline{toc}{chapter}{List of Publications}
+    \input{../chapter/publication}
+
+    \newpage
+    \printindex
+
+\end{document}
