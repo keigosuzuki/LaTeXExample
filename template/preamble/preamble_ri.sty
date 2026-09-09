@@ -1,4 +1,4 @@
-\usepackage{times}
+\usepackage{newtxtext}
 \usepackage{booktabs}
 \usepackage[dvipdfmx]{graphicx}
 \usepackage{listings}
@@ -12,8 +12,9 @@
 \special{pdf: minorversion=7} % pdf画像のため
 
 \usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}
 \usepackage{ascmac}
-\usepackage{epsf}
 \usepackage{pifont}
 \usepackage{docmute} %単体でコンパイルできるようにする
 \usepackage{mathtools} % dcases を使う
@@ -29,7 +30,6 @@
 
 
 %%%%%%% 便利define 
-\newcommand{\bm}[1]{\mbox{\boldmath $#1$}}
 \newcommand{\eq}[1]{Eq.(\ref{eq:#1})}
 \newcommand{\zu}[1]{図\ref{fig:#1}}
 \newcommand{\shiki}[1]{式(\ref{eq:#1})}
@@ -37,7 +37,7 @@
 \newcommand{\grp}[1]{Fig.\ \ref{grp:#1}}
 \newcommand{\tab}[1]{Table\ \ref{tab:#1}}
 \newcommand{\defeq}{:=}
-\newcommand{\bvec}[1]{\mbox{\boldmath $#1$}} %太字
+\newcommand{\bvec}[1]{\bm{#1}} %太字
 \newcommand{\tvec}[1]{\bvec{#1}^{\mathsf{T}}} %太字転置
 
 %% about theorem

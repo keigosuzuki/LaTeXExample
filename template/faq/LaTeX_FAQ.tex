@@ -3,7 +3,7 @@
 \usepackage{url}
 
 \title{{\LaTeX} FAQ}
-\author{Koseki Lab}
+\author{}
 \date{\today}
 
 \begin{document}
@@ -11,7 +11,7 @@
 \maketitle
 
 \section{\TeX}
-古関研究室では，\TeX (読み方は，テフ，テックなど)という文章組版システムを用いて論文・資料作成を行います。
+\TeX (読み方は，テフ，テックなど)という文章組版システムを用いて論文・資料作成を行います。
 組版とは，文章などのレイアウトを行うなどという意味です。
 \TeX は Microsoft Word や一太郎などのワープロソフトとは違い，ソースファイルを作成し，typeset，プレビューという手順を踏みます。
 その他の\TeX の特徴として以下のものが挙げられます。
@@ -126,21 +126,16 @@ platex，texファイルからpdfファイルを直接得るためには，ptex2
 
 一般的には統合開発環境でこれらを制御するので直接これらのコマンドを触ることはあまりありませんが，覚えておいて損はないです。
 
-\section{\LaTeX のInstall}
-\LaTeX を制御するには様々なパッケージやソフトをインストールする必要があります。
-TeXLiveまたはW32TeX(Windowsのみ)をインストールしましょう。
+\section{\LaTeX のインストール}
+\LaTeX 環境を構築するには TeX Live をインストールするのが標準的です。
 
-細かいファイルを大量に（3000ファイル程度）ダウンロードするせいか，途中でダウンロードに失敗することがよくあります。
-根気強く再トライしましょう\dots\dots
-
-\subsection{TeXLive}
+\subsection{TeX Live}
 \url{https://www.tug.org/texlive/}
 
-\subsection{W32TeX}
-\url{https://www.ms.u-tokyo.ac.jp/~abenori/soft/abtexinst.html}
+Windows, macOS (MacTeX), Linux のいずれの環境でも TeX Live を用いることで同一のコンパイル環境を構築できます。
 
 \section{推奨エディタ：TeXstudio}
-\url{http://texstudio.sourceforge.net/}
+\url{https://www.texstudio.org/}
 
 上記のTeXインストーラを用いることでデフォルトでTeXworksというエディタが付属しますが，機能面などからTeXstudioをおすすめします。
 

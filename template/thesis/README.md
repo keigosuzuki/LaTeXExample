@@ -30,9 +30,9 @@
 - front_page
     - 卒業論文中間報告と卒業論文の表紙(注意:拡張子は.docx)
 - publication_example
-    - 過去の先輩方の発表文献(publication.tex)の例
+    - 既発表文献リスト（publication.tex）の記述作例
 - template_1
-    - 堀藤本研究室の伝統的なフォーマット
+    - 標準的な学位論文フォーマット
     - 主に卒業論文や修士論文用
     - 文書スタイルはjreport
     - 論文形式の片面刷り(oneside)
